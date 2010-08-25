@@ -1992,22 +1992,22 @@ void update_particles_i(pixel *vid, int start, int inc)
                             }
                         }
 
-#ifdef HEAT_ENABLE
-    if (t==PT_HETR){
-        for(nx=-1; nx<2; nx++)
-            for(ny=-1; ny<2; ny++)
-                if(x+nx>=0 && y+ny>0 && x+nx<XRES && y+ny<YRES &&
-                pmap[y+ny][x+nx] &&
-                (pmap[y+ny][x+nx]&0xFF)!=PT_HETR&&
-                (pmap[y+ny][x+nx]&0xFF)!=0xFF)
-        {
-        r = pmap[y+ny][x+nx];
-        if(parts[r>>8].temp+ (parts[r>>8].temp*0.2f)<=MAX_TEMP)
-        {parts[r>>8].temp += parts[r>>8].temp*0.2f;}
-        else {parts[r>>8].temp = 3500;}
-    }
-}
-#endif
+			#ifdef HEAT_ENABLE
+				if (t==PT_HETR){
+					for(nx=-1; nx<2; nx++)
+						for(ny=-1; ny<2; ny++)
+							if(x+nx>=0 && y+ny>0 && x+nx<XRES && y+ny<YRES &&
+							pmap[y+ny][x+nx] &&
+							(pmap[y+ny][x+nx]&0xFF)!=PT_HETR&&
+							(pmap[y+ny][x+nx]&0xFF)!=0xFF)
+					{
+					r = pmap[y+ny][x+nx];
+					if(parts[r>>8].temp+ (parts[r>>8].temp*0.2f)<=MAX_TEMP)
+					{parts[r>>8].temp += parts[r>>8].temp*0.2f;}
+					else {parts[r>>8].temp = 3500;}
+				}
+			}
+			#endif
 
             }
             else if(t==PT_NEUT)
